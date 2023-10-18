@@ -5,9 +5,11 @@ def call(String dockerHubUsername, String imageName ) {
     sh "docker tag ${imageName} ${dockerHubUsername}/${imageName}:latest"
     sh "docker tag ${imageName} ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}"
     // Push the Docker image
-    withDockerRegistry([url: 'https://index.docker.io/v1/', credentialsId: 'docker']) {
-    sh "docker push ${dockerHubUsername}/${imageName}:latest"    
+    withDockerRegistry([url: 'https://index.docker.io/v1/', credentialsId: 'docker-cred']) {
+    sh "docker push ${dockerHubUsername}/${imageName}:latest"   /
+    sh "docker push ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}"
+    sh "docker rmi ${dockerHubUsername}/${imageName}:latest " /
+    sh "docker rmi ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}" 
     }
-    sh "docker rmi ${dockerHubUsername}/${imageName}:latest "
-    sh "docker rmi ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}"
+    
 }
