@@ -75,15 +75,7 @@ pipeline {
                 sh 'docker run -d --name youtube1 -p 3000:3000 sevenajay/youtube:latest'
             }
         }
-        stage('Deploy to kubernets'){
-            steps{
-                script{
-                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                        sh 'kubectl apply -f deployment.yml'
-                    }
-                }
-            }
-        }
+        
 
     }
     post {
