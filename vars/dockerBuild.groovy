@@ -9,5 +9,5 @@ def call(String dockerHubUsername, String imageName ) {
     sh "docker push ${dockerHubUsername}/${imageName}:latest"    
     }
     sh "docker rmi ${dockerHubUsername}/${imageName}:latest "
-    sh "docker rmi ${imageName} ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}"
+    sh "docker rmi ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}"
 }
