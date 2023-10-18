@@ -8,6 +8,8 @@ def call(String dockerHubUsername, String imageName ) {
     withDockerRegistry(credentialsId: 'docker-cred') {
     sh "docker push ${dockerHubUsername}/${imageName}:latest"   
     sh "docker push ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}"
+    sh "docker rmi -f ${dockerHubUsername}/${imageName} ${dockerHubUsername}/${imageName}:latest"
+    sh "docker rmi -f ${dockerHubUsername}/${imageName} ${dockerHubUsername}/${imageName}:${BUILD_NUMBER}"
     }
     
 }
