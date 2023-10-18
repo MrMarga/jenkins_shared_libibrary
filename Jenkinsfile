@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/Youtube-clone-app.git'
+                git branch: 'main', url: 'https://github.com/MrMarga/youtube.git'
             }
         }
         stage("Sonarqube Analysis "){
@@ -34,7 +34,7 @@ pipeline {
         stage("quality gate"){
            steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonarqube' 
                 }
             } 
         }
